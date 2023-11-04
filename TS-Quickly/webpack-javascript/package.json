@@ -1,16 +1,19 @@
 {
-    "name": "webpack-javascript", 
+    "name": "webpack-javascript",
     "description": "Code sample for chapter 6",
     "homepage": "https://www.manning.com/books/typescript-quickly",
     "license": "MIT",
     "scripts": {
-      "bundleup": "webpack-cli"
+        "bundleup": "webpack-cli"
     },
-    "dependencies": { 
-      "chalk": "^2.4.1"
+    "dependencies": {
+        "chalk": "^2.4.1"
     },
-    "devDependencies": { 
-      "webpack": "^4.28.3",
-      "webpack-cli": "^3.1.2"
+    "devDependencies": {
+        "terser-webpack-plugin": "^1.4.5",
+        "ts-loader": "^5.3.2",
+        "typescript": "^3.2.2",
+        "webpack": "^4.47.0",
+        "webpack-cli": "^3.1.2"
     }
 }  
