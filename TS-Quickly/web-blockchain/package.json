@@ -1,0 +1,16 @@
+{
+  "name": "web_blockchain_app",
+  "version": "2.0.1",
+  "license": "MIT",
+  "scripts": {
+    "start": "serve",
+    "compileDeploy": "tsc && npm run deploy",
+    "deploy": "copyfiles -f src/browser/*.html src/browser/*.css dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "copyfiles": "^2.1.1",
+    "serve": "^10.1.2",
+    "typescript": "^5.2.2"
+  }
+}
