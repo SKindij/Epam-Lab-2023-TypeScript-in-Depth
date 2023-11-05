@@ -5,7 +5,22 @@
 
 
 
+### Структура проекту
 
+```go
+📁 blockchain-app/
+│
+├─ README.md
+├─ package.json
+├─ tsconfig.json
+├─ 
+├─ 
+│
+├─ 📁 src/
+│   ├─ bc101.ts
+│   ├─ bc101_proof_of_work.ts
+
+```
 
 ### Getting started
 
