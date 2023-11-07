@@ -1,4 +1,4 @@
-// src/emums.ts
+// src/enums.ts
 enum Category { 
   JavaScript, 
   CSS, 
