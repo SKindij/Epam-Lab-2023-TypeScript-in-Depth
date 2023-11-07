@@ -8,10 +8,13 @@
 ├─ app.ts
 ├─ index.html
 │
-├─ emums.ts
+├─ enums.ts
 ├─ 
 ├─
 ├─
+│
+├─ 📁 data/
+│   └─ libraries.json
 │
 └─ 📁 lib/
     └─ utility-functions.ts
