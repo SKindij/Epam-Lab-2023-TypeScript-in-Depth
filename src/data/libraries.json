@@ -1,0 +1,5 @@
+[
+  { "lib": "libName1", "books": 1000000000, "avgPagesPerBook": 250 },
+  { "lib": "libName2", "books": 5000000000, "avgPagesPerBook": 300 },
+  { "lib": "libName3", "books": 3000000000, "avgPagesPerBook": 280 }
+]
