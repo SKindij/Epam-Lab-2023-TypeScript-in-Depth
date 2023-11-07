@@ -1,14 +1,13 @@
 // src/lib/utility-functions.ts
-import { Category } from '../emums';
+import { Category } from '../enums';
+import { Book, BookInfo, LibraryInfo } from '../types';
 
-// тип для масиву книг
-type Book = {
-  id:number;
-  title:string;
-  author:string;
-  available:boolean;
-  category:Category;
-};
+const librarysData:LibraryInfo[] = [
+  { lib: 'libName1', books: 1_000_000_000n, avgPagesPerBook: 250 },
+  { lib: 'libName2', books: 5_000_000_000n, avgPagesPerBook: 300 },
+  { lib: 'libName3', books: 3_000_000_000n, avgPagesPerBook: 280 },
+];
+
 
 // функція для отримання масиву усіх книг
 function getAllBooks(): Book[] {
@@ -26,10 +25,52 @@ function getAllBooks(): Book[] {
 };
 
 // функція для виводу простої інформації про книги
-export function logFirstAvailable(books:Book[] = getAllBooks()): void {
+export function logFirstAvailable(): void {
+  const books:Book[] = getAllBooks();
   const totalBooks = books.length;
   const firstAvailableBook = books.find((book) => book.available);
 
   console.log(`Кількість книг у масиві: ${totalBooks}`);
   console.log(`Назва першої доступної книги: ${firstAvailableBook?.title}`);
 };
+
+// функція, яка повертає масив назв книг за заданою категорією
+export function getBookTitlesByCategory(category:Category): string[] {
+  const books:Book[] = getAllBooks();
+  const bookTitles:string[] = books
+    .filter((book) => book.category === category)
+    .map((book) => book.title);
+  return bookTitles;
+}
+
+// функція, яка виводить масив рядків в консоль
+export function logBookTitles(titles:string[]): void {
+  titles.forEach((title) => {
+    console.log(title);
+  });
+}
+
+// функція, що за індексом повертає пару [назва книжки + автор]
+export function getBookAuthorByIndex(index:number): BookInfo|undefined {
+  const books:Book[] = getAllBooks();
+  const book = books[index];
+  // якщо потрібна книжка є у масиві
+  if (book) {
+    return [book.title, book.author];
+  }
+  // а якщо книги з заданим індексом не знайдено
+  return undefined;
+}
+
+// функція для підрахунку кількості сторінок книг у трьох бібліотеках
+function calcTotalPages(libraryData:LibraryInfo[]): bigint {
+  let totalPages: bigint = 0n;
+  // проходимося по кожній бібліотеці та додаємо кількість сторінок до загальної
+  for (const library of libraryData) {
+    totalPages += library.books * BigInt(library.avgPagesPerBook);
+  }
+
+  return totalPages;
+}
+
+export const totalNumberOfPages:bigint = calcTotalPages(librarysData);
