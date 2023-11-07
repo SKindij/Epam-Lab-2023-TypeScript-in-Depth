@@ -1,4 +1,6 @@
 // src/types.ts
+import { Category } from './enums';
+
 // тип для масиву книг
 export type Book = {
   id:number;
@@ -10,6 +12,7 @@ export type Book = {
 
 // Tuple (кортеж з мітками) для збереження [назви книги, автор]
 export type BookInfo = [title:string, author:string];
+
 // тип для масиву з інформацією про бібліотеки
 export type LibraryInfo = {
   lib:string;
