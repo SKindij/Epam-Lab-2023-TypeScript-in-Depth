@@ -1,14 +1,5 @@
 // src/types.ts
-import { Category } from './enums';
-
-// тип для масиву книг
-export type Book = {
-  id:number;
-  title:string;
-  author:string;
-  available:boolean;
-  category:Category;
-};
+import { Author, Book, Person } from './interfaces';
 
 // Tuple (кортеж з мітками) для збереження [назви книги, автор]
 export type BookInfo = [title:string, author:string];
@@ -19,3 +10,9 @@ export type LibraryInfo = {
   books:bigint;
   avgPagesPerBook:number;
 };
+
+export type BookProperties = keyof Book | 'isbn';
+
+export type PersonBook = Person & Book;
+
+
