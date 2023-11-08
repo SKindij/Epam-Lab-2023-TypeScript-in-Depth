@@ -1,4 +1,4 @@
-// src/app-Task-03.ts
+// src/app.ts
 import { Category } from './enums';
 
 import { 
@@ -8,8 +8,12 @@ import {
   getBookAuthorByIndex,
   totalNumberOfPages,
   createCustomerID,
-  createCustomer
-} from './lib/Functions-Task-03';
+  createCustomer,
+  getBookByID,
+  checkoutBooks,
+  getTitles,
+  bookTitleTransorm
+} from './lib/functions';
 
 // функція для виведення вітання на сторінці
 function showHello(divName: string, name: string) {
@@ -51,4 +55,22 @@ const javascriptBookTitles = getBookTitlesByCategory();
 
 logFirstAvailable();
 
+// знаходимо книжку за її ID
+const bookWithID1 = getBookByID(1);
+  console.log(bookWithID1);
 
+// перевіряємо доступність книг для клієнта
+const customerName = 'John Doe';
+const bookIDsToCheckout = [1, 3, 5]; 
+
+const availableBooks = checkoutBooks(customerName, ...bookIDsToCheckout);
+
+console.log('--- Завдання 03.03. Перевантаження функцій ---');
+
+const checkedOutBooks = getTitles(false);
+  console.log(checkedOutBooks);
+
+console.log('--- Завдання 03.04. Функції-стрердження ---');
+
+console.log(bookTitleTransorm('Learn TypeScript'));
+console.log(bookTitleTransorm(273));
