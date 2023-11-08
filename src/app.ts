@@ -1,9 +1,10 @@
 // src/app.ts
 import { Category } from './enums';
+import { Book, DamageLogger, Author, Librarian  } from './interfaces';
 
-import { 
+import {
   logFirstAvailable,
-  getBookTitlesByCategory, 
+  getBookTitlesByCategory,
   logBookTitles,
   getBookAuthorByIndex,
   totalNumberOfPages,
@@ -12,11 +13,28 @@ import {
   getBookByID,
   checkoutBooks,
   getTitles,
-  bookTitleTransorm
+  bookTitleTransorm,
+  printBook,
+  getProperty
 } from './lib/functions';
 
+const favoriteAuthor:Author = {
+  name: 'John Doe',
+  email: 'johndoe@example.com',
+  numBooksPublished: 10,
+};
+
+const favoriteLibrarian:Librarian = {
+  name: 'Jane Smith',
+  email: 'janesmith@example.com',
+  department: 'Fiction',
+  assistCustomer: (custName, bookTitle) => {
+    console.log(`Assisting customer ${custName} with the book "${bookTitle}"`);
+  },
+};
+
 // функція для виведення вітання на сторінці
-function showHello(divName: string, name: string) {
+function showHello(divName:string, name:string) {
   const elt = document.getElementById(divName);
   elt!.innerText = `Hello from ${name}`;
 }
@@ -24,53 +42,57 @@ function showHello(divName: string, name: string) {
 showHello('greeting', 'TypeScript');
 
 
-// Task 03
-console.log('--- TASK 03: Functions ---');
-console.log('--- Завдання 03.01. Функціональний тип ---');
-
-// оголошуємо змінну myID рядкового типу
-  let myID:string;
-// викликаємо функцію createCustomerID() зі значеннями "Ann" та 10
-  myID = createCustomerID("Ann", 10);
-// Виводимо отримане значення у консоль
-  console.log(myID); // =>> "Ann10"
-
-// оголошення змінної з типом функції
-  let idGenerator: (name:string, id:number) => string;
-// надаємо змінній функціональний вираз за допомогою стрілочної функції
-  idGenerator = (name:string, id:number) => `${name}${id}`;
-    idGenerator = createCustomerID;
-      console.log(idGenerator('Barbara', 357));
-
-console.log('--- 03.02. Необов’язкові, значення за замовчуванням та рест параметри ---');
-
-// виклик функції з одним, двома та трьома аргументами
-createCustomer("Анна"); // Тільки ім'я
-createCustomer("Борис", 25); // Ім'я і вік
-createCustomer("Кароліна", 30, "Лондон"); // Ім'я, вік і місто
-
-// виклик функцій без аргумента
-const javascriptBookTitles = getBookTitlesByCategory();
-  console.log(javascriptBookTitles);
-
+// Task 04
+console.log('--- TASK 04: Interfaces ---');
+console.log('--- Завдання 04.01. Об’явлення інтерфейсу ---');
 logFirstAvailable();
 
-// знаходимо книжку за її ID
-const bookWithID1 = getBookByID(1);
-  console.log(bookWithID1);
+const myBook:Book = {
+  id: 5,
+  title: 'Colors, Backgrounds, and Gradients',
+  author: 'Eric A. Meyer',
+  available: true,
+  category: Category.CSS,
+  year: 2015,
+  copies: 3,
+  pages: 200,
+  markDamaged: function (reason:string) {
+    console.log(`Damaged: ${reason}`);
+  }
+};
 
-// перевіряємо доступність книг для клієнта
-const customerName = 'John Doe';
-const bookIDsToCheckout = [1, 3, 5]; 
+printBook(myBook);
+// для перевірки наявності методу перед викликом використовуємо операцію &&
+myBook.markDamaged && myBook.markDamaged('missing back cover');
 
-const availableBooks = checkoutBooks(customerName, ...bookIDsToCheckout);
+console.log('--- Завдання 04.02. Об’явлення інтерфейсу для функціонального типу ---');
+const logDamage:DamageLogger = function (reason:string) {
+  console.log(`Damage logged: ${reason}`);
+};
 
-console.log('--- Завдання 03.03. Перевантаження функцій ---');
+console.log('--- Завдання 04.03. Розширення інтерфейсів ---');
+favoriteLibrarian.assistCustomer('John', 'Introduction to Programming');
 
-const checkedOutBooks = getTitles(false);
-  console.log(checkedOutBooks);
+console.log('--- Завдання 04.04. Необов’язковий ланцюжок ---');
 
-console.log('--- Завдання 03.04. Функції-стрердження ---');
+const offer:any = {
+  book: {
+    title: 'Essential TypeScript',
+  },
+};
+/*
+  Оператор ?. використовується для зручного доступу до властивостей об'єкта та методів,
+  перевіряючи на наявність об'єкта перед доступом до властивостей або методів.
+  Якщо властивість або метод існують, вони викликаються або доступні; якщо немає, то повертається undefined.
+*/
+console.log(offer.magazine);
+console.log(offer.magazine?.getTitle());
+console.log(offer.book?.title);
+console.log(offer.book?.authors?.[0]);
+console.log(offer.book?.authors?.[0].name);
 
-console.log(bookTitleTransorm('Learn TypeScript'));
-console.log(bookTitleTransorm(273));
+console.log('--- Завдання 04.05. keyof оператор ---');
+console.log(getProperty(myBook, 'title')); // Виведе "Sample Book"
+console.log(getProperty(myBook, 'markDamaged')); // Виведе ім'я функції "anonymous"
+console.log(getProperty(myBook, 'isbn')); // Виведе undefined, оскільки властивість "isbn" не існує.
+
