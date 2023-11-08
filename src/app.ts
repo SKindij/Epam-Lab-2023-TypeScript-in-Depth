@@ -1,4 +1,4 @@
-// src/app.ts
+// src/app-Task-03.ts
 import { Category } from './enums';
 
 import { 
@@ -6,11 +6,10 @@ import {
   getBookTitlesByCategory, 
   logBookTitles,
   getBookAuthorByIndex,
-  totalNumberOfPages
-} from './lib/utility-functions';
-
-
-
+  totalNumberOfPages,
+  createCustomerID,
+  createCustomer
+} from './lib/Functions-Task-03';
 
 // функція для виведення вітання на сторінці
 function showHello(divName: string, name: string) {
@@ -20,28 +19,36 @@ function showHello(divName: string, name: string) {
 
 showHello('greeting', 'TypeScript');
 
-// Task 02
-console.log('---TASK 02: Types Basics---');
-console.log('---Завдання 02.01 Базові типи---');
+
+// Task 03
+console.log('--- TASK 03: Functions ---');
+console.log('--- Завдання 03.01. Функціональний тип ---');
+
+// оголошуємо змінну myID рядкового типу
+  let myID:string;
+// викликаємо функцію createCustomerID() зі значеннями "Ann" та 10
+  myID = createCustomerID("Ann", 10);
+// Виводимо отримане значення у консоль
+  console.log(myID); // =>> "Ann10"
+
+// оголошення змінної з типом функції
+  let idGenerator: (name:string, id:number) => string;
+// надаємо змінній функціональний вираз за допомогою стрілочної функції
+  idGenerator = (name:string, id:number) => `${name}${id}`;
+    idGenerator = createCustomerID;
+      console.log(idGenerator('Barbara', 357));
+
+console.log('--- 03.02. Необов’язкові, значення за замовчуванням та рест параметри ---');
+
+// виклик функції з одним, двома та трьома аргументами
+createCustomer("Анна"); // Тільки ім'я
+createCustomer("Борис", 25); // Ім'я і вік
+createCustomer("Кароліна", 30, "Лондон"); // Ім'я, вік і місто
+
+// виклик функцій без аргумента
+const javascriptBookTitles = getBookTitlesByCategory();
+  console.log(javascriptBookTitles);
 
 logFirstAvailable();
 
-const javascriptBooks = getBookTitlesByCategory(Category.JavaScript);
-  console.log('JavaScript книги:');
-  logBookTitles(javascriptBooks);
 
-console.log('---Завдання 02.02 Приведення до константи---');
-
-let bookIndex = 4;
-const bookInfo = getBookAuthorByIndex(bookIndex);
-  if (bookInfo) {
-    const [title, author] = bookInfo;
-	console.log(`Результат пошуку за індексом ${bookIndex}.`);
-    console.log(`Назва книги: ${title}`);
-    console.log(`Автор: ${author}`);
-  } else {
-    console.log(`Книга за індексом ${bookIndex} не знайдена.`);
-  }
-
-// конвертуємо значення bigint у рядок (string) і виводимо в консоль
-console.log('Загальна кількість сторінок у всіх бібліотеках: ', totalNumberOfPages.toString());
