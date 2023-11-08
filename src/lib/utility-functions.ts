@@ -26,8 +26,7 @@ function getAllBooks(): readonly Book[] {
 };
 
 // функція для виводу простої інформації про книги
-export function logFirstAvailable(): void {
-  const books = getAllBooks(); // оголошення без анотації типу
+export function logFirstAvailable(books: readonly Book[] = getAllBooks()): void {
   const totalBooks = books.length;
   const firstAvailableBook = books.find((book) => book.available);
 
@@ -36,7 +35,7 @@ export function logFirstAvailable(): void {
 };
 
 // функція, яка повертає масив назв книг за заданою категорією
-export function getBookTitlesByCategory(category:Category): string[] {
+export function getBookTitlesByCategory(category:Category = Category.JavaScript): string[] {
   const books = getAllBooks(); // оголошення без анотації типу
   const bookTitles:string[] = books
     .filter((book) => book.category === category)
@@ -75,3 +74,20 @@ function calcTotalPages(libraryData: readonly LibraryInfo[]): bigint {
 }
 
 export const totalNumberOfPages:bigint = calcTotalPages(librarysData);
+
+
+// функція повертає конкатенацію вхідних значень у вигляді рядка
+export function createCustomerID(name:string, id:number): string {
+  return `${name}${id}`;
+}
+
+// функція, яка виводить ім'я, вік і місто клієнта в консоль
+export function createCustomer(name:string, age?:number, city?:string): void {
+  console.log(`Ім'я клієнта: ${name}`);
+  if (age !== undefined) {
+    console.log(`Вік клієнта: ${age}`);
+  }
+  if (city !== undefined) {
+    console.log(`Місто клієнта: ${city}`);
+  }
+}
