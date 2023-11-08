@@ -120,44 +120,47 @@ export function checkoutBooks(customer:string, ...bookIDs:number[]): string[] {
 export function getTitles(author:string): string[];
 export function getTitles(available:boolean): string[];
 export function getTitles(id:number, available:boolean): string[];
-
+// основна реалізація функції з використанням решти параметрів
 export function getTitles(...args: [string|boolean] | [number, boolean]): string[] {
     const books = getAllBooks();
+    // якщо функції передано 1 аргумент
     if (args.length === 1) {
         const [arg] = args;
         if (typeof arg === 'string') {
-            return books.filter(book => book.author === arg).map(book => book.title);
+            // фільтруємо книги за автором та повертаємо їх заголовки
+            return books
+                .filter(book => book.author === arg)
+                .map(book => book.title);
         } else if (typeof arg === 'boolean') {
-            return books.filter(book => book.available === arg).map(book => book.title);
+            // фільтруємо книги за доступністю та повертаємо заголовки
+            return books
+                .filter(book => book.available === arg)
+                .map(book => book.title);
         }
+    // якщо функції передано 2 аргументи
     } else if (args.length === 2) {
         const [id, available] = args;
         if (typeof id === 'number' && typeof available === 'boolean') {
-            return books
-			    .filter(book => book.id === id && book.available === available)
-				.map(book => book.title);
+          // фільтруємо книги за ID та доступністю
+          return books
+			          .filter(book => book.id === id && book.available === available)
+				        .map(book => book.title);
         }
     }
+    // якщо жодна з умов не співпадає, повертаємо порожній масив
     return [];
 }
 
-// функція-ствердження
+// приймає будь-який тип даних, і стверджує, що data є рядком 
 function assertStringValue(data:any): asserts data is string {
     if (typeof data !== 'string') {
         throw new Error('Value should have been a string');
     }
 }
-// функція перевртання назви книжки
+// функція перевертання назви книжки
 export function bookTitleTransorm(title:any): string {
+    // перевіряємо, що введені дані є рядком
     assertStringValue(title);
+    // перетворюємо title у масив символів, реверсуємо його та з'єднуємо назад у рядок
     return [...title].reverse().join('');
 }
-
-
-
-
-
-
-
-
-
