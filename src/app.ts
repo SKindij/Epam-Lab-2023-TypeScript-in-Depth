@@ -1,6 +1,7 @@
 // src/app.ts
 import { Category } from './enums';
 import { Book, DamageLogger, Author, Librarian  } from './interfaces';
+import { ReferenceItem } from './classes';
 
 import {
   logFirstAvailable,
@@ -42,57 +43,23 @@ function showHello(divName:string, name:string) {
 showHello('greeting', 'TypeScript');
 
 
-// Task 04
-console.log('--- TASK 04: Interfaces ---');
-console.log('--- Завдання 04.01. Об’явлення інтерфейсу ---');
+// Task 05 Classes
+console.log('--- TASK 05: Classes ---');
+console.log('--- Завдання 05.01. Створення та використання класів ---');
+
 logFirstAvailable();
 
-const myBook:Book = {
-  id: 5,
-  title: 'Colors, Backgrounds, and Gradients',
-  author: 'Eric A. Meyer',
-  available: true,
-  category: Category.CSS,
-  year: 2015,
-  copies: 3,
-  pages: 200,
-  markDamaged: function (reason:string) {
-    console.log(`Damaged: ${reason}`);
-  }
-};
+// ініціалізуємо змінну ref об'єктом ReferenceItem
+const ref = new ReferenceItem('Sample Title', 2023);
+// викликаємо метод printItem()
+ref.printItem();
 
-printBook(myBook);
-// для перевірки наявності методу перед викликом використовуємо операцію &&
-myBook.markDamaged && myBook.markDamaged('missing back cover');
+// ініціалізуємо властивість _publisher та виведемо значення в консоль
+ref.publisher = 'example publisher';
+console.log(ref.publisher);
 
-console.log('--- Завдання 04.02. Об’явлення інтерфейсу для функціонального типу ---');
-const logDamage:DamageLogger = function (reason:string) {
-  console.log(`Damage logged: ${reason}`);
-};
 
-console.log('--- Завдання 04.03. Розширення інтерфейсів ---');
-favoriteLibrarian.assistCustomer('John', 'Introduction to Programming');
 
-console.log('--- Завдання 04.04. Необов’язковий ланцюжок ---');
 
-const offer:any = {
-  book: {
-    title: 'Essential TypeScript',
-  },
-};
-/*
-  Оператор ?. використовується для зручного доступу до властивостей об'єкта та методів,
-  перевіряючи на наявність об'єкта перед доступом до властивостей або методів.
-  Якщо властивість або метод існують, вони викликаються або доступні; якщо немає, то повертається undefined.
-*/
-console.log(offer.magazine);
-console.log(offer.magazine?.getTitle());
-console.log(offer.book?.title);
-console.log(offer.book?.authors?.[0]);
-console.log(offer.book?.authors?.[0].name);
 
-console.log('--- Завдання 04.05. keyof оператор ---');
-console.log(getProperty(myBook, 'title')); // Виведе "Sample Book"
-console.log(getProperty(myBook, 'markDamaged')); // Виведе ім'я функції "anonymous"
-console.log(getProperty(myBook, 'isbn')); // Виведе undefined, оскільки властивість "isbn" не існує.
 
