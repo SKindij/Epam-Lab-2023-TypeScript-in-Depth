@@ -1,7 +1,7 @@
 // src/app.ts
 import { Category } from './enums';
 import { Book, DamageLogger, Author, Librarian  } from './interfaces';
-import { ReferenceItem } from './classes';
+import { ReferenceItem, Encyclopedia } from './classes';
 
 import {
   logFirstAvailable,
@@ -49,17 +49,26 @@ console.log('--- Завдання 05.01. Створення та викорис�
 
 logFirstAvailable();
 
-// ініціалізуємо змінну refItem об'єктом ReferenceItem
-const refItem = new ReferenceItem(1, 'Sample Title', 2023);
-// виводимо об'єкт у консоль
-console.dir(refItem);
+console.log('--- Завдання 05.02. Розширення класів ---');
 
-// викликаємо метод printItem()
-refItem.printItem();
+// створення нового об'єкта Encyclopedia
+const refBook = new Encyclopedia(11, 'Encyclopedia of Science', 2023, 2);
 
 // ініціалізуємо властивість _publisher та виведемо її в консоль
-refItem.publisher = 'example publisher';
-console.log(refItem.publisher);
+refBook.publisher = 'example publisher';
+console.log(refBook.publisher); // => EXAMPLE PUBLISHER
 
-// викликаємо метод getID() та виводимо результат у консоль
-console.log(`ID: ${refItem.getID()}`);
+// виводимо об'єкт у консоль
+console.dir(refBook); // output => Encyclopedia{...}
+
+// викликаємо різні методи
+console.log('--- Properties of refBook ---');
+console.log(`ID: ${refBook.getID()}`); // output => ID: 11 
+refBook.printItem(); 
+/* output:
+ => Encyclopedia of Science was published in 2023
+ => Department: Default Department
+ => Edition: 2 (2023)
+*/
+refBook.printCitation(); // output => Encyclopedia of Science - 2023
+
