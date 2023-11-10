@@ -15,4 +15,4 @@ export type BookProperties = keyof Book | 'isbn';
 
 export type PersonBook = Person & Book;
 
-
+export type BookOrUndefined = Book | undefined;
