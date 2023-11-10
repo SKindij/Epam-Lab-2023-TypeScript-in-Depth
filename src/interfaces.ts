@@ -33,9 +33,10 @@ interface Librarian extends Person {
   assistCustomer(custName:string, bookTitle:string):void;
 };
 
-
-
-
+interface TOptions {
+  duration?:number;
+  speed?:number;
+}
 
 
 
