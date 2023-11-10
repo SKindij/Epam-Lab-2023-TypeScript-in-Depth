@@ -9,15 +9,15 @@
 ├─ index.html
 │
 ├─ enums.ts
-├─ 
-├─
-├─
+├─ interfaces.ts
+├─ types.ts
 │
-├─ 📁 data/
-│   └─ libraries.json
+├─ 📁 lib/
+│    ├─ decorators.ts
+│    └─ functions.ts
 │
-└─ 📁 lib/
-    └─ utility-functions.ts
+└─ 📁 data/
+    └─ libraries.json
 
 ```
 
