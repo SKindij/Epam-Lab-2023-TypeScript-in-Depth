@@ -3,10 +3,17 @@
 class ReferenceItem {
   // приватна (“soft private”) властивість
   private _publisher:string = '';
-
-  // конструктор для створення об'єкту
-  constructor(public title:string, private year:number) {
-    console.log('Creating a new ReferenceItem...'); 
+  // приватна (“hard private”) властивість
+  private readonly id:number;
+  
+  // конструктор для створення нового об'єкту
+  constructor(
+    id:number,
+    public title:string, 
+	private year:number,
+  ) {
+    console.log('Creating a new ReferenceItem...');
+    this.id = id;
   }
   
   // гетер повернення значення властивості у верхньому регістрі
@@ -17,8 +24,11 @@ class ReferenceItem {
   set publisher(newPublisher:string) {
     this._publisher = newPublisher;
   }
-  
-  
+ 
+  getID(): number {
+    return this.id;
+  }
+ 
   // виводимо інфо про об'єкт в консоль
   printItem(): void {
     console.log(`${this.title} was published in ${this.year}`);
