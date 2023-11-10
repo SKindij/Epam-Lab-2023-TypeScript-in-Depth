@@ -49,17 +49,17 @@ console.log('--- Завдання 05.01. Створення та викорис�
 
 logFirstAvailable();
 
-// ініціалізуємо змінну ref об'єктом ReferenceItem
-const ref = new ReferenceItem('Sample Title', 2023);
+// ініціалізуємо змінну refItem об'єктом ReferenceItem
+const refItem = new ReferenceItem(1, 'Sample Title', 2023);
+// виводимо об'єкт у консоль
+console.dir(refItem);
+
 // викликаємо метод printItem()
-ref.printItem();
+refItem.printItem();
 
-// ініціалізуємо властивість _publisher та виведемо значення в консоль
-ref.publisher = 'example publisher';
-console.log(ref.publisher);
+// ініціалізуємо властивість _publisher та виведемо її в консоль
+refItem.publisher = 'example publisher';
+console.log(refItem.publisher);
 
-
-
-
-
-
+// викликаємо метод getID() та виводимо результат у консоль
+console.log(`ID: ${refItem.getID()}`);
