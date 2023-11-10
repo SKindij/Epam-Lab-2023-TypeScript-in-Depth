@@ -1,8 +1,9 @@
 /* eslint-disable no-redeclare */
 // src/lib/functions.ts
 import { Category } from '../enums';
-import { Book } from '../interfaces';
-import { BookInfo, LibraryInfo, BookProperties } from '../types';
+import { Book, TOptions } from '../interfaces';
+import { BookInfo, LibraryInfo, BookProperties, BookOrUndefined } from '../types';
+import { RefBook } from '../classes';
 
 // оголошуємо масив даних про бібліотеки з const assertion
 const librarysData:readonly LibraryInfo[] = [
@@ -92,7 +93,7 @@ export function createCustomer(name:string, age?:number, city?:string):void {
 };
 
 // функція, яка приймає id книжки та повертає книжку
-export function getBookByID(id:Book['id']):Book|undefined {
+export function getBookByID(id:Book['id']):BookOrUndefined {
   const books = getAllBooks();
   return books.find(book => book.id === id);
 };
@@ -178,8 +179,24 @@ export function getProperty(book:Book, prop:BookProperties):any {
   return value;
 };
 
+export function setDefaultConfig(options:TOptions):TOptions {
+  return {
+    duration: options.duration ?? 90, // значення за замовчуванням якщо не задано
+    speed: options.speed ?? 40, // значення за замовчуванням якщо не задано
+  };
+}
 
+// функціz-ствердження умови
+export function assertRefBookInstance(condition:any):asserts condition {
+  if (!condition) {
+    throw new Error('It is not an instance of RefBook');
+  }
+}
 
+export function printRefBook(data:any):void {
+  assertRefBookInstance(data instanceof RefBook);
+  data.printItem();
+}
 
 
 
