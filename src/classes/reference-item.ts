@@ -1,16 +1,22 @@
 // src/classes/reference-item.ts
 
-class ReferenceItem {
+/*
+  Абстрактний клас не можна інстанціювати напряму, 
+  але можна створити похідні класи, які реалізують абстрактні методи.
+*/
+abstract class ReferenceItem {
+  // статична властивість з доступом через ім'я класу
+  static department:string = 'Default Department';
   // приватна (“soft private”) властивість
   private _publisher:string = '';
   // приватна (“hard private”) властивість
   private readonly id:number;
-  
+
   // конструктор для створення нового об'єкту
   constructor(
     id:number,
     public title:string, 
-	private year:number,
+	protected year:number,
   ) {
     console.log('Creating a new ReferenceItem...');
     this.id = id;
@@ -24,7 +30,7 @@ class ReferenceItem {
   set publisher(newPublisher:string) {
     this._publisher = newPublisher;
   }
- 
+  // метод, що надає доступ до приватної властивості
   getID(): number {
     return this.id;
   }
@@ -32,7 +38,10 @@ class ReferenceItem {
   // виводимо інфо про об'єкт в консоль
   printItem(): void {
     console.log(`${this.title} was published in ${this.year}`);
+	console.log(`Department: ${ReferenceItem.department}`);
   }
+  // абстрактний метод, який не приймає параметрів і не повертає значення
+  abstract printCitation(): void;
    
 }
 
