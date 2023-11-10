@@ -12,6 +12,12 @@
 ├─ interfaces.ts
 ├─ types.ts
 │
+├─ 📁 classe/
+│    ├─ reference-item.ts
+│    ├─ encyclopedia.ts
+│    ├─
+│    └─ index.ts
+│
 ├─ 📁 lib/
 │    ├─ decorators.ts
 │    └─ functions.ts
