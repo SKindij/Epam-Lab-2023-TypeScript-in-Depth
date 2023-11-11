@@ -146,14 +146,6 @@ export function printBook(book:Book):void {
   console.log(`${book.title} by ${book.author}`);
 };
 
-export function getProperty(book:Book, prop:BookProperties):any {
-  const value = book[prop];
-  if (typeof value === 'function') {
-    return value.name;
-  }
-  return value;
-};
-
 export function setDefaultConfig(options:TOptions):TOptions {
   return {
     duration: options.duration ?? 90, // значення за замовчуванням якщо не задано
@@ -178,6 +170,23 @@ export function purge<T>(invetory:T[]):T[] {
   return invetory.slice(2);
 };
 
-
-
-
+export function getProperty(book:Book, prop:BookProperties):any {
+  const value = book[prop];
+  if (typeof value === 'function') {
+    return value.name;
+  }
+  return value;
+};
+/**
+ * отримати властивість за ключем і повернути її значення або ім'я методу
+ * @param obj об'єкт, з якого потрібно отримати властивість
+ * @param prop ключ властивості, яку потрібно отримати
+ * @returns значення властивості або ім'я методу
+ */
+export function getObjectProperty<TObject, TKey extends keyof TObject>(
+  obj:TObject, prop:TKey
+):TObject[TKey] | string {
+  const value = obj[prop];
+  // для функції повертаємо її назву, а властивості її значення
+  return typeof value === 'function' ? value.name : value;
+};
