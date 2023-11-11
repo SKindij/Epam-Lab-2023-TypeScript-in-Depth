@@ -13,7 +13,7 @@ import { Shelf } from './classes';
 import { } from './classes/library';
 
 import {
-  purge
+  purge, getObjectProperty
 } from './lib/functions';
 
 // *TODO: Task 07
@@ -50,6 +50,13 @@ const magazineShelf = new Shelf<Magazine>();
 magazines.forEach(mag => magazineShelf.add(mag));
 console.log(magazineShelf.getFirst().title);
 
+console.log('--- Завдання 07.03. Загальні обмеження ---');
+// виводимо назви журналів з полички
+magazineShelf.printTitles();
+// знаходимо конкретний журнал на поличці
+console.log(magazineShelf.find('Five Points'));
+console.log(getObjectProperty(magazines[0], 'title'));
+console.log(getObjectProperty<Book, 'author'|'title'>(inventory[0], 'author'));
 
-
+console.log('--- Завдання 07.04. Утиліти ---');
 
