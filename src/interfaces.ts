@@ -38,8 +38,20 @@ interface TOptions {
   speed?:number;
 }
 
+interface Magazine {
+  title:string;
+  publisher:string;
+};
+
+interface ShelfItem {
+  title:string;
+};
 
 
 
 
-export { Book, DamageLogger, Author, Librarian, Person };
+export {
+  Book, DamageLogger as Logger, Author,
+  Librarian, Person, TOptions, Magazine,
+  ShelfItem
+};
