@@ -353,10 +353,32 @@
 
 ### Завдання 07.04. Утиліти
 
-
+1. Об'явіть **аліас типу BookRequiredFields** у файлі types.ts, використовуючи інтерфейс Book та утиліту Required.
+2. Об'явіть **змінну bookRequiredFields** типу BookRequiredFields та присвойте їй відповідний об'єкт.
+3. Об'явіть **аліас типу UpdatedBook**, використовуючи інтерфейс Book та утиліту Partial.
+4. Об'явіть **змінну updatedBook** типу UpdatedBook і присвойте їй відповідний об'єкт.
+5. Об'явіть **аліас типу AuthorWoEmail**, використовуючи інтерфейс Author та утиліту Omit.
+6. Об'явіть **аліас СreateCustomerFunctionType** для функціонального типу функції createCustomer().
+7. Об'явіть **змінну params**, використовуючи аліас типу СreateCustomerFunctionType і утиліту Parameters, 
+    - викличте функцію createCustomer(), передавши змінну params.
 
 ### Завдання 07.05. Відображені типи, умовні типи
 
+1. Об'явіть у файлі types.ts **аліас fn** для функціонального типу функції, яка приймає три параметри з типами string, number, boolean і повертає тип symbol.
+2. Об'явіть **аліаси типів Param1<T>, Param2<T>, Param3<T>**, які повертають тип першого, другого та третього параметрів функції відповідно.
+3. Об'явіть **аліаси P1, P2, P3** та отримайте типи першого, другого та третього параметрів типу fn.
+> Автор: Olena_Hlukhovska@epam.com
+4. Створіть **утиліти RequiredProps<T> та OptionalProps<T>** у файлі types.ts, які повертають union тип required та optional властивостей об'єкта. 
+    - Використовуйте mapped type для перебору ключів T та conditional type для трансформації значень ключів типу T. 
+    - Додайте загальне обмеження для T розширивши його від типу object у RequiredProps та OptionalProps.
+5. Об'явіть **аліас типу BookRequiredProps та BookOptionalProps**, використовуючи інтерфейс Book та утиліти RequiredProps та OptionalProps. 
+    - Спробуйте замість Book передати примітивний тип.
+6. Створіть **утиліту RemoveProps <T extends object, TProps extends keyof T>**, яка видаляє властивості TProps з переданого типу T.
+7. Об'явіть **аліас типу BookRequiredPropsType та BookOptionalPropsType**, використовуючи інтерфейс Book, аліаси типу BookRequiredProps та BookOptioalProps та утиліту RemoveProps Спробуйте замість Book передати Author.
+> Домашне завдання Автор: Oleksandr_Cherevach@epam.com
+8. Створіть **функцію update()**, яка приймає один параметр типу boolean.
+    - Якщо значення аргументу true, функція повинна повертати значення типу string.
+    - Якщо значення аргументу false, функція повинна повертати значення типу number.
 
 
 
