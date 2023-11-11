@@ -1,16 +1,9 @@
+//  path src/lib/functions.ts
 /* eslint-disable no-redeclare */
-// src/lib/functions.ts
 import { Category } from '../enums';
 import { Book, TOptions } from '../interfaces';
 import { BookInfo, LibraryInfo, BookProperties, BookOrUndefined } from '../types';
 import { RefBook } from '../classes';
-
-// оголошуємо масив даних про бібліотеки з const assertion
-const librarysData:readonly LibraryInfo[] = [
-  { lib: 'libName1', books: 1_000_000_000n, avgPagesPerBook: 250 },
-  { lib: 'libName2', books: 5_000_000_000n, avgPagesPerBook: 300 },
-  { lib: 'libName3', books: 3_000_000_000n, avgPagesPerBook: 280 },
-];
 
 // функція для отримання масиву усіх книг
 export function getAllBooks():readonly Book[] {
@@ -26,12 +19,10 @@ export function getAllBooks():readonly Book[] {
   ];
   return books;
 };
-
 // функція для виводу простої інформації про книги
 export function logFirstAvailable(books:readonly Book[] = getAllBooks()):void {
   const totalBooks = books.length;
   const firstAvailableBook = books.find((book) => book.available);
-
   console.log(`Кількість книг у масиві: ${totalBooks}`);
   console.log(`Назва першої доступної книги: ${firstAvailableBook?.title}`);
 };
@@ -44,14 +35,12 @@ export function getBookTitlesByCategory(category:Category = Category.JavaScript)
     .map((book) => book.title);
   return bookTitles;
 };
-
 // функція, яка виводить масив рядків в консоль
 export function logBookTitles(titles:string[]):void {
   titles.forEach((title) => {
     console.log(title);
   });
 };
-
 // функція, що за індексом повертає пару [назва книжки + автор]
 export function getBookAuthorByIndex(index:number):BookInfo|undefined {
   const books = getAllBooks(); // оголошення без анотації типу
@@ -64,21 +53,9 @@ export function getBookAuthorByIndex(index:number):BookInfo|undefined {
   return undefined;
 };
 
-// функція для підрахунку кількості сторінок книг у трьох бібліотеках
-function calcTotalPages(libraryData:readonly LibraryInfo[]):bigint {
-  let totalPages:bigint = 0n;
-  // проходимося по кожній бібліотеці та додаємо кількість сторінок до загальної
-  for (const library of libraryData) {
-    totalPages += library.books * BigInt(library.avgPagesPerBook);
-  }
-
-  return totalPages;
-};
-export const totalNumberOfPages:bigint = calcTotalPages(librarysData);
-
 // функція повертає конкатенацію вхідних значень у вигляді рядка
 export function createCustomerID(name:string, id:number):string {
-  return `${name}${id}`;
+  return `${name}/${id}`;
 };
 
 // функція, яка виводить ім'я, вік і місто клієнта в консоль
@@ -113,7 +90,6 @@ export function checkoutBooks(customer:string, ...bookIDs:number[]):string[] {
   availableBooks.forEach((title) => {
     console.log(title);
   });
-
   return availableBooks;
 };
 
@@ -166,7 +142,6 @@ export function bookTitleTransorm(title:any):string {
   return [...title].reverse().join('');
 };
 
-
 export function printBook(book:Book):void {
   console.log(`${book.title} by ${book.author}`);
 };
@@ -184,19 +159,25 @@ export function setDefaultConfig(options:TOptions):TOptions {
     duration: options.duration ?? 90, // значення за замовчуванням якщо не задано
     speed: options.speed ?? 40, // значення за замовчуванням якщо не задано
   };
-}
+};
 
 // функціz-ствердження умови
 export function assertRefBookInstance(condition:any):asserts condition {
   if (!condition) {
     throw new Error('It is not an instance of RefBook');
   }
-}
+};
 
 export function printRefBook(data:any):void {
   assertRefBookInstance(data instanceof RefBook);
   data.printItem();
-}
+};
+
+// дженерик (загальна) функція
+export function purge<T>(invetory:T[]):T[] {
+  return invetory.slice(2);
+};
+
 
 
 
