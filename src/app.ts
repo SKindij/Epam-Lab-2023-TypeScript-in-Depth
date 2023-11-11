@@ -10,10 +10,10 @@ showHello('greeting', 'TypeScript');
 import { Category } from './enums';
 import { Book, Magazine } from './interfaces';
 import { Shelf } from './classes';
-import { } from './classes/library';
+import { BookRequiredFields, UpdatedBook, CreateCustomerFunctionType } from './types';
 
 import {
-  purge, getObjectProperty
+  purge, getObjectProperty, createCustomer
 } from './lib/functions';
 
 // *TODO: Task 07
@@ -59,4 +59,29 @@ console.log(getObjectProperty(magazines[0], 'title'));
 console.log(getObjectProperty<Book, 'author'|'title'>(inventory[0], 'author'));
 
 console.log('--- Завдання 07.04. Утиліти ---');
+// тут екземпляр книжки з усіма обовязковими властивостями
+const bookRequiredFields:BookRequiredFields = {
+  author: 'Anna',
+  available: false,
+  category: Category.Angular,
+  id: 1,
+  markDamaged: null,
+  title: 'Learn Angular',
+  pages: 300,
+  year: 1999
+};
+// тут екземпляр книжки з усіма опціональними властивостями
+const updatedBook:UpdatedBook = {
+  id: 1,
+  pages: 300
+};
+
+// утилітний тип Parameters<T> дозволяє отримати тип параметрів для функції
+let params:Parameters<CreateCustomerFunctionType>;
+params = ['Anna', 36, 'Kyiv'];
+// оператор spread (...) розгортає елементи масиву як аргументи для функції
+createCustomer(...params);
+
+console.log('--- Завдання 07.05. Відображені типи, умовні типи ---');
+
 
