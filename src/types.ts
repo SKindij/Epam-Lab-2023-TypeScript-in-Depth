@@ -1,5 +1,6 @@
 // src/types.ts
 import { Author, Book, Person } from './interfaces';
+import { createCustomer } from './lib/functions';
 
 // Tuple (кортеж з мітками) для збереження [назви книги, автор]
 export type BookInfo = [title:string, author:string];
@@ -21,4 +22,14 @@ export type BookOrUndefined = Book | undefined;
 export type BookRequiredFields = Required<Book>;
 // такий аліас робить всі властивості необов'язковими
 export type UpdatedBook = Partial<Book>;
+
+/*
+  Утилітарний тип Omit дозволяє створювати новий тип,
+  який має всі властивості вихідного типу,
+  але без певної властивості, вказаної в другому параметрі.
+*/
+export type AuthorWoEmaial = Omit<Author, 'email'>;
+
+export type CreateCustomerFunctionType = typeof createCustomer;
+
 
