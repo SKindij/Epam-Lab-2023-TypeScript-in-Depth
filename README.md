@@ -15,7 +15,10 @@
 ├─ 📁 classe/
 │    ├─ reference-item.ts
 │    ├─ encyclopedia.ts
-│    ├─
+│    ├─ library.ts
+│    ├─ reader.ts
+│    ├─ shelf.ts
+│    ├─ university-librarian.ts
 │    └─ index.ts
 │
 ├─ 📁 lib/
