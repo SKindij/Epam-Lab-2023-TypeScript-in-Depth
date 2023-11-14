@@ -210,8 +210,95 @@ TypeScript може автоматично визначати тип парам�
   // використання функції для смартфону
   const myPhone = new Smartphone();
   useElectronicDevice(myPhone); // працює, оскільки смартфон реалізує ElectronicDevice
-
 ```
+
+### Утиліти в TypeScript
+
+Wе набір готових інструментів, які допомагають працювати з типами більш ефективно. 
+TypeScript надає кілька вбудованих утилітних типів, які полегшують роботу з типами даних. 
+
+
+#### Partial<T>
+
+робить всі властивості типу T необов'язковими
+
+```typescript
+  interface Person {
+    name: string;
+    age: number;
+  }
+
+  const partialPerson: Partial<Person> = { name: 'John' };
+  // тепер об'єкт partialPerson може містити тільки властивість name або age або обидві
+```
+
+#### Readonly<T>
+
+робить всі властивості типу T доступними тільки для читання
+
+```typescript
+  interface Config {
+    server: string;
+    port: number;
+  }
+
+  const readOnlyConfig: Readonly<Config> = { server: 'localhost', port: 8080 };
+  // тепер властивості об'єкта readOnlyConfig не можна змінювати
+```
+
+#### Record<K, T>
+
+створює об'єкт з ключами типу K та значеннями типу T
+
+```typescript
+  type Fruit = 'apple' | 'banana' | 'orange';
+  const fruitPrices: Record<Fruit, number> = {
+    apple: 1,
+    banana: 2,
+    orange: 3,
+  };
+  // тепер fruitPrices - об'єкт, де ключі - це Fruit, а значення - number
+```
+
+#### Pick<T, K>
+
+обирає тільки вказані властивості типу T за їхніми ключами типу K
+
+```typescript
+  interface Car {
+    brand: string;
+    model: string;
+    year: number;
+  }
+
+  const carInfo: Pick<Car, 'brand' | 'model'> = {
+    brand: 'Toyota',
+    model: 'Camry',
+  };
+  // тепер carInfo - об'єкт з властивостями brand та model
+```
+
+#### Omit<T, K>
+
+виключає вказані властивості типу T за їхніми ключами типу K
+
+```typescript
+  interface Computer {
+    brand: string;
+    processor: string;
+    memory: number;
+  }
+
+  const computerSpecs: Omit<Computer, 'memory'> = {
+    brand: 'Dell',
+    processor: 'Intel',
+  };
+  // тепер computerSpecs - об'єкт без властивості memory
+```
+
+
+
+
 
 
 
