@@ -1,5 +1,13 @@
 # Epam-Lab-2023-TypeScript-in-Depth
 
+#### Завдання для виконання - [Practice Document](https://github.com/SKindij/Epam-Lab-2023-TypeScript-in-Depth/blob/main/Tasks.md)
+
+#### Довідник [Compendium](https://github.com/SKindij/Epam-Lab-2023-TypeScript-in-Depth/blob/main/Compendium.md)
+
+  * TS: Generics
+  * TS: Decorators
+  * TS: Asynchronous Patterns
+
 ### структура робочих файлів проекту
 
 ```go
