@@ -159,6 +159,60 @@ TypeScript може автоматично визначати тип парам�
   stringPrinter.print('Hello, Generics!'); // вивід: Hello, Generics!
 ```
 
+### Загальні обмеження (Generics Constraints)
+
+У TypeScript ви можете обмежити типи, які може приймати параметр типу (Type Parameter) у загальних функціях чи класах. 
+
+```typescript
+  // приклад: обмеження типу до об'єктів, які мають властивість name
+  function logName<T extends { name: string }>(obj: T): void {
+    console.log(obj.name);
+  }
+
+  const person = { name: 'John', age: 30 };
+  const book = { title: 'The TypeScript Guide' };
+
+  logName(person); // працює, оскільки об'єкт має властивість name
+  logName(book);   // помилка, оскільки властивості name немає
+```
+
+**<T extends ...>** вказує, що параметр типу повинен бути підтипом (або реалізувати) об'єкта, який має вказані властивості
+
+Розглянемо приклад із сфери виробництва електроніки.
+```typescript
+  // інтерфейс для електронного пристрою
+  interface ElectronicDevice {
+    powerOn(): void;
+    powerOff(): void;
+  }
+
+  // функція для використання електронного пристрою
+  function useElectronicDevice<T extends ElectronicDevice>(device: T): void {
+    device.powerOn();
+    device.powerOff();
+  }
+
+  // реалізація конкретного електронного пристрою - смартфон
+  class Smartphone implements ElectronicDevice {
+    powerOn(): void {
+      console.log('Smartphone is powered on.');
+    }
+
+    powerOff(): void {
+      console.log('Smartphone is powered off.');
+    }
+
+    makeCall(): void {
+     console.log('Making a phone call.');
+   }
+  }
+
+  // використання функції для смартфону
+  const myPhone = new Smartphone();
+  useElectronicDevice(myPhone); // працює, оскільки смартфон реалізує ElectronicDevice
+
+```
+
 
 
 
