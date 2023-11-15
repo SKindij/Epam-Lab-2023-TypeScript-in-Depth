@@ -422,32 +422,82 @@ TypeScript надає кілька вбудованих утилітних ти�
 
 ### Декоратор поля
 
+- викликається при оголошенні поля класу
 
 ```typescript
+  function propertyDecorator(target:any, propertyKey:string) {
+    console.log(`Property ${propertyKey} is decorated.`);
+  }
 
+  class Example {
+    @propertyDecorator
+    greeting: string = "Hello!";
+  }
+
+  const instance = new Example();
+  console.log(instance.greeting); // Output: Hello!
 ```
 
 ### Декоратор автоаксесора
 
+- Викликається при оголошенні автоаксесора (get/set).
+- Можливість використовувати один декоратор для обох аксесорів (get/set).
+
+```typescript
+  // декоратор автоаксесора для геттера/сеттера
+  function accessorDecorator(target:any, propertyKey:string, descriptor:PropertyDescriptor) {
+    // вивід інформації про клас та властивість, до якої застосовано декоратор
+    console.log(`Accessor Decorator called on: ${target.constructor.name}`);
+    console.log(`Accessor (property) ${propertyKey} is decorated.`);
+  }
+
+  class ExampleClass {
+    private _value:number = 0;
+
+    // застосування декоратора до геттера та сеттера
+    @accessorDecorator
+    get value(): number {
+      return this._value;
+    }
+
+    @accessorDecorator
+    set value(newValue:number) {
+      this._value = newValue;
+    }    
+  }
+
+  // створення екземпляру класу та виклик геттера та сеттера
+  const exampleInstance = new ExampleClass();
+  exampleInstance.value = 42; // запуск сеттера
+  console.log(exampleInstance.value); // запуск геттера
+  /* Output:
+      Accessor Decorator called on: ExampleClass
+      Property name: value
+      Accessor Decorator called on: ExampleClass
+      Property name: value
+      42
+  */
+```
+
+- - -
+
+# Asynchronous Patterns 
+
+
+### Функція зворотнього виклику 
 
 
 ```typescript
 
 ```
 
-### Декоратор аксесорів
 
 
+###
 
 ```typescript
 
 ```
-
-
-
-
-
-
 
 
 
