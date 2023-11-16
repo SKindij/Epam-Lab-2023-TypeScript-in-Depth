@@ -38,7 +38,10 @@ abstract class ReferenceItem {
   // виводимо інфо про об'єкт в консоль
   printItem(): void {
     console.log(`${this.title} was published in ${this.year}`);
-	console.log(`Department: ${ReferenceItem.department}`);
+    console.log(`Department: ${ReferenceItem.department}`);
+    // альтернативний запис, що не вимагає назви класу
+    console.log(`Department: ${Object.getPrototypeOf(this).constructor.department}`);
+  }
   }
   // абстрактний метод, який не приймає параметрів і не повертає значення
   abstract printCitation(): void;
