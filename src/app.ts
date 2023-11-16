@@ -26,13 +26,17 @@ const inventory:Book[] = [
   { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
   { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
 ];
-// console.log(purge(inventory));
-// console.log(purge([101, 102, 103, 104, 105, 106, 107]));
+ console.log(purge(inventory));
+ console.log(purge([101, 102, 103, 104, 105, 106, 107]));
 
-// let purgeNumbers = purge<number>(inventory:number[]);
+// оголошення функції purge з параметром типу number
+let purgeNumbers = purge<number>;
+// функція purgeNumbers очищує лише числові масиви
+console.log('Purged numeric array:', purgeNumbers([101, 102, 103, 104, 105, 106, 107]));
 
 console.log('--- Завдання 07.02. Загальні інтерфейси і класи ---');
-// створюємо екземпляр класу Shelf
+
+// створюємо екземпляр дженерик класу Shelf<T> із <Book>
 const bookShelf = new Shelf<Book>();
 // зберігаємо усі книжки з inventory в bookShelf
 inventory.forEach(book => bookShelf.add(book));
@@ -44,44 +48,21 @@ const magazines:Magazine[] = [
   { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
   { title: 'Five Points', publisher: 'GSU' }
 ];
-// створюємо екземпляр класу Shelf
+// створюємо екземпляр дженерик класу Shelf<T> із <Magazine>
 const magazineShelf = new Shelf<Magazine>();
 // зберігаємо усі дурнали з magazines в magazineShelf
 magazines.forEach(mag => magazineShelf.add(mag));
 console.log(magazineShelf.getFirst().title);
 
 console.log('--- Завдання 07.03. Загальні обмеження ---');
+
 // виводимо назви журналів з полички
 magazineShelf.printTitles();
 // знаходимо конкретний журнал на поличці
 console.log(magazineShelf.find('Five Points'));
+
 console.log(getObjectProperty(magazines[0], 'title'));
-console.log(getObjectProperty<Book, 'author'|'title'>(inventory[0], 'author'));
+console.log(getObjectProperty(inventory[0], 'author'));
 
-console.log('--- Завдання 07.04. Утиліти ---');
-// тут екземпляр книжки з усіма обовязковими властивостями
-const bookRequiredFields:BookRequiredFields = {
-  author: 'Anna',
-  available: false,
-  category: Category.Angular,
-  id: 1,
-  markDamaged: null,
-  title: 'Learn Angular',
-  pages: 300,
-  year: 1999
-};
-// тут екземпляр книжки з усіма опціональними властивостями
-const updatedBook:UpdatedBook = {
-  id: 1,
-  pages: 300
-};
-
-// утилітний тип Parameters<T> дозволяє отримати тип параметрів для функції
-let params:Parameters<CreateCustomerFunctionType>;
-params = ['Anna', 36, 'Kyiv'];
-// оператор spread (...) розгортає елементи масиву як аргументи для функції
-createCustomer(...params);
-
-console.log('--- Завдання 07.05. Відображені типи, умовні типи ---');
 
 
