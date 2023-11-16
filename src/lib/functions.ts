@@ -167,26 +167,32 @@ export function printRefBook(data:any):void {
 
 // дженерик (загальна) функція
 export function purge<T>(invetory:T[]):T[] {
+  // повертає початковий масив без двух перших елементів
   return invetory.slice(2);
 };
 
 export function getProperty(book:Book, prop:BookProperties):any {
-  const value = book[prop];
+  // кажемо TS, що властивість prop є ключем типу Book
+  const value = book[prop as keyof Book];
   if (typeof value === 'function') {
     return value.name;
   }
   return value;
 };
+
 /**
  * отримати властивість за ключем і повернути її значення або ім'я методу
  * @param obj об'єкт, з якого потрібно отримати властивість
  * @param prop ключ властивості, яку потрібно отримати
  * @returns значення властивості або ім'я методу
+  Використання keyof забезпечує, що prop може бути лише ключем об'єкта TObject.
+ 
  */
 export function getObjectProperty<TObject, TKey extends keyof TObject>(
   obj:TObject, prop:TKey
-):TObject[TKey] | string {
+):TObject[TKey]|string {
   const value = obj[prop];
-  // для функції повертаємо її назву, а властивості її значення
+  // для функції повертаємо її назву, а для властивості її значення
   return typeof value === 'function' ? value.name : value;
 };
+
