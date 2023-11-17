@@ -45,6 +45,61 @@ export function logger<TFunction extends new (...args:any[]) => any>(
   яке буде викликане при створенні нового екземпляра класу;
 */
 
+// фабрика (генератор декоратора), яка отримує булевий параметр 
+export function writable(isWritable:boolean) {
+  // внутрішня функція, яка є самим декоратором методу
+  return function (
+    target:any, methodName:string, descriptor:PropertyDescriptor
+  ):PropertyDescriptor {
+    console.log(target, methodName, descriptor);
+    descriptor.writable = isWritable;
+	return descriptor;
+  };
+}
+/*
+  target - екземпляр класу, що містить метод, який декорується;
+  methodName - ім'я методу, який декорується;
+  descriptor - об'єкт, що містить властивість value, яка є функцією, що визначає метод;
+*/
+
+// декоратор, який додає затримку виклику методу
+export function timeout(ms:number) {
+  // повертає функцію, яка буде викликана для обробки методу
+  return function (
+    target:any, methodName:string, descriptor:PropertyDescriptor
+  ):PropertyDescriptor {
+    // зберігає оригінальний метод для подальшого виклику
+    const originalMethod = descriptor.value;
+    // перезаписує значення дескриптора (оригінальний метод)
+    descriptor.value = function (...args: any[]) {
+      // перевіряє, чи користувач підтверджує свою дію
+      if (window.confirm('Are you sure?')) {
+	    // встановлює затримку та...
+        setTimeout(() => {
+		  // ...викликає оригінальний метод з переданими аргументами
+          originalMethod.apply(this, args);
+        }, ms);
+      }
+
+    };
+      // змінений дескриптор для встановлення нового методу
+      return descriptor;
+    };
+}
+
+// декоратор, що встановлює значення ініціалізації поля:
+export function setInitial(inputValue:any) {
+  return function (target:any, propertyKey:string) {
+    target[propertyKey] = inputValue;
+  };
+}
+
+
+
+
+
+
+
 
 
 
