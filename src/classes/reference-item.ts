@@ -1,10 +1,12 @@
 // src/classes/reference-item.ts
+import { timeout } from '../lib/decorators';
 
 /*
   Абстрактний клас не можна інстанціювати напряму, 
   але можна створити похідні класи, які реалізують абстрактні методи.
 */
 abstract class ReferenceItem {
+  #id:number; 
   // статична властивість з доступом через ім'я класу
   static department:string = 'Default Department';
   // приватна (“soft private”) властивість
@@ -36,6 +38,7 @@ abstract class ReferenceItem {
   }
  
   // виводимо інфо про об'єкт в консоль
+  @timeout(2000)
   printItem(): void {
     console.log(`${this.title} was published in ${this.year}`);
     console.log(`Department: ${ReferenceItem.department}`);
@@ -49,7 +52,6 @@ abstract class ReferenceItem {
 }
 
 export { ReferenceItem };
-
 /*
 В TypeScript "soft private" властивість означає, що властивість позначена 
 як приватна (за допомогою _ перед іменем), але це лише конвенція.
