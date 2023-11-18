@@ -1,8 +1,9 @@
 // path: src/classes/shelf.ts
 import { ShelfItem } from '../interfaces';
 
-
+// можемо використовувати параметри типу з властивістюяк у ShelfItem
 export default class Shelf<T extends ShelfItem> {
+  // приватна властивість, що є масивом типу <T>
   private items:T[];
 
   constructor() {
