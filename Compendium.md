@@ -315,6 +315,7 @@ TypeScript надає кілька вбудованих утилітних ти�
   // тепер computerSpecs - об'єкт без властивості memory
 ```
 
+#### in keyof
 Однак ви також можете створювати свої власні відображені типи за допомогою конструкції keyof та in. 
 
 ```typescript
@@ -339,7 +340,6 @@ TypeScript надає кілька вбудованих утилітних ти�
   }
 ```
 
-
 #### Умовні типи (Conditional Types)
 дозволяють створювати типи, які залежать від умови
 
@@ -361,6 +361,68 @@ TypeScript надає кілька вбудованих утилітних ти�
 
 Це корисно, коли ми хочемо витягнути тип елементів масиву, але ми не знаємо наперед, що це буде. 
 Умовні типи з infer надають можливість автоматично визначати та використовувати типи в процесі аналізу типів у TypeScript.
+
+
+### Додаткові можливості
+
++ Exclude<Type, ExcludeUnion>
+  - _виключає вказаний тип з об'єднання_
++ Extract<Type, Union>
+  - _витягує вказаний тип з об'єднання_
++ NonNulable<Type>
+  - _забирає undefined та null з об'єднання_
+
+```typescript
+  type T1 = Exclude<string|number|(() => void), Function>;
+    // => string | number
+  type T2 = Extract<string|number|(() => void), Function>;
+    // => () => void
+  type T3 = NonNulable<string|number|undefined|null>;
+    // => string | number
+```
+
+#### Parameters<Type>
+_застосовується до функціональних типів_
+
+```typescript
+  function createDescription(title:string, year:number) {
+    // body
+  };
+
+  type ParamType = Parameters<type of createDescription>
+    // повертає tuple => [string, number]
+```
+
+#### ConstructorParameters<Type>
+_застосовується до класів_
+
+```typescript
+  class Book {
+    constructor(public title:string, public author:string) { }
+  }
+
+  type ConstructorParams = ConstructorParameters<type of Book>;
+  // повертає => [title:string, author:string]
+```
+
+#### ReturnType<Type>
+_застосовується до функціональних типів_
+
+```typescript
+  function createDescription(title:string, year:number):string {
+    // body
+  };
+
+  type createDescriptionType = ReturnType<type of createDescription>
+    // тут повертає => string
+```
+
+### Утиліти літеральних рядкових типів
+
++ ``Uppercase<T>``
++ ``Lowercase<T>``
++ ``Capitalize<T>``
++ ``Uncapitalize<T>``
 
 - - -
 
