@@ -1,11 +1,12 @@
 // src/classes/university-librarian.ts
 import * as Interfaces from '../interfaces';
-import { freeze, logger, writable } from '../lib/decorators';
+import { freeze, logger, writable, format } from '../lib/decorators';
 
 // @freeze('UniversityLibrarian')
 @logger
 class UniversityLibrarian implements Interfaces.Librarian {
   // даний клас реалізує визначений інтерфейс
+  @format()
   name:string;
   email:string;
   department:string;
