@@ -94,6 +94,75 @@ export function setInitial(inputValue:any) {
   };
 }
 
+// декоратор до властивості, що форматує її значення 
+export function format<This, Return>(pref:string = 'Mr./Mrs.') {
+  return function (target:any, propertyKey:string):any {
+    // оголошуємо приватне поле для зберігання значення властивості
+    const privateFieldName = `_${propertyKey}`;
+    // метод, який дозволяє додавати нові властивості 
+	// або змінювати існуючі властивості для об'єкта
+    Object.defineProperty(target, propertyKey, {
+      get():any {
+        // повертаємо відформатоване значення поля
+        return `${pref} ${this[privateFieldName]}`;
+      },
+      set(value:any):void {
+        // зберігаємо значення в приватному полі
+        this[privateFieldName] = value;
+      },
+      enumerable: true,
+      configurable: true,
+    });
+  };
+}
+
+
+// декоратор самостійного визначення логіки getter та setter для властивості
+export function positiveIntegerProp(target:any, propertyName:string):void {
+  // локальна змінна для зберігання значення властивості
+  let value: number;
+  // Getter для отримання значення властивості
+  const getter = function () {
+    return value;
+  };
+  // Setter для встановлення значення властивості
+  const setter = function (newValue:number):void {
+    // перевірка, чи нове значення є цілим числом та більше 0
+    if (Number.isInteger(newValue) && newValue > 0) {
+	  // встановлення значення, якщо умови виконуються
+      value = newValue;
+    } else {
+	  // викидання помилки, якщо значення не відповідає умовам
+      throw new Error(`Invalid value for ${propertyName}. Must be a positive integer.`);
+    }
+  };
+  // встановлення дескриптора властивості
+  Object.defineProperty(target, propertyName, {
+    get: getter,
+    set: setter,
+    enumerable: true,
+    configurable: true,
+  });
+}
+
+// а це декоратор власне самого аксесору 
+export function positiveInteger(target:any, propName:string, descriptor:PropertyDescriptor): PropertyDescriptor {
+  // збереження оригінальної функції-сеттера
+  const originalSet = descriptor.set;
+  // перевизначення функції-сеттера 
+  descriptor.set = function(value:number) {
+    // перевірка, чи значення не менше 1 та ціле    
+    if(value < 1 || !Number.isInteger(value)) {
+      throw new Error(`Invalid value for ${propName}. Must be a positive integer.`);
+    }
+    // виклик оригінальної функції-сеттера, якщо вона існує
+    if (originalSet) {
+      originalSet.call(this, value);
+    }
+  }
+  // повернення оновленого дескриптора властивості
+  return descriptor;
+}
 
 
 
