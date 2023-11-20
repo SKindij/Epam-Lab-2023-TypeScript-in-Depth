@@ -45,8 +45,8 @@ fLibrarian.teachCommunity();
 
 console.log('--- Завдання 08.04. Декоратор методу ---');
 
-const encyclopedia = new RefBook(48, 'Encyclopedia of TypeScript', 2023, 4);
-encyclopedia.printItem();
+const encyclopedia48 = new RefBook(48, 'Encyclopedia of TypeScript', 2023, 4);
+encyclopedia48.printItem();
 
 console.log('--- Завдання 08.05. Декоратор поля ---');
 
@@ -56,14 +56,29 @@ console.log(`Library: id ${library.id}`);
 
 console.log('--- Завдання 08.06. Декоратор автоаксесора ---');
 
-
-
-
-
-
-
+// створюємо екземпляр класу UniversityLibrarian
+const librarianInstance = new UniversityLibrarian();
+// встановлюємо значення для властивості name
+librarianInstance.name = 'John Doe';
+// отримуємо та виводимо значення властивості name у консоль
+console.log(librarianInstance.name); // => Mr./Mrs. John Doe
 
 console.log('--- Завдання 08.07. Декоратор аксесорів ---');
+
+// створення екземпляра класу Encyclopedia
+const encyclopedia71 = new RefBook(71, 'Encyclopedia of Epam', 1999, 2);
+
+// спроба встановлення різних значень
+try {
+  encyclopedia71.copies = 15;
+
+  encyclopedia71.copies = -4; 
+} catch (error:any) {
+   // виведе: "Invalid value for copies. Must be a positive integer."
+  console.error(error.message);
+};
+
+console.log("RefBook71 copies:", encyclopedia71.copies);
 
 
 
