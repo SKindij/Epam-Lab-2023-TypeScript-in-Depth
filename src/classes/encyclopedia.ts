@@ -1,8 +1,19 @@
 // src/classes/encyclopedia.ts
 import { ReferenceItem } from './reference-item';
+import { positiveInteger } from '../lib/decorators';
 
 export default class Encyclopedia extends ReferenceItem {
+  // приватна властивість для зберігання кількості копій
+  private _copies:number;
 
+  get copies():number {
+        return this._copies;
+    }
+  // декорований Setter для властивості copies
+  @positiveInteger
+  set copies(value:number) {
+    this._copies = value;
+  }
 
   // конструктор для створення нового об'єкту
   constructor(
