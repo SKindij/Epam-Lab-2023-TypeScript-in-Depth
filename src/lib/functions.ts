@@ -196,3 +196,33 @@ export function getObjectProperty<TObject, TKey extends keyof TObject>(
   return typeof value === 'function' ? value.name : value;
 };
 
+// 09.01. Функцій зворотнього виклику
+export function getBooksByCategory(category:Category, callback:Callback<string[]>):void {
+  // використовуємо setTimeout для імітації асинхронного виклику
+  setTimeout(() => {
+    try {
+      const titles = getBookTitlesByCategory(category);
+      // якщо знайдено книги, то
+      if (titles.length > 0) {
+        // викликаємо callback і передаємо null (без помилки) та знайдені книги
+        callback(null, titles);
+      } else {
+        // якщо книги не знайдено, генеруємо помилку
+        throw new Error('No books found.');
+      }
+    } catch (error) {
+      // у разі помилки викликаємо callback і передаємо error та null
+      callback(error, null);
+    }
+  }, 2000);
+};
+
+export const logCategorySearch:LibMgrCallback = (err, titles) => {
+  if (err) {
+    // якщо прийшов об'єкт помилки, виводимо повідомлення про помилку
+    console.error(err.message);
+  } else {
+    // інакше виводимо назви книг
+    logBookTitles(titles || []);
+  }
+};
