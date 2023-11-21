@@ -609,6 +609,13 @@ _застосовується до функціональних типів_
   });
 ```
 
+#### Дженерик Інтерфейс Колбеку
+```typescript
+  interface Callback<T> {
+    (err: Error|null, data: T|null): void;
+  }
+```
+
 ### Promises
 Проміс - це об'єкт, який представляє результат асинхронної операції. Він може бути в стані "виконано" (resolved) з результатом чи в стані "відхилено" (rejected) з помилкою. Проміси роблять код асинхронних операцій більш зручним для розуміння та управління.
 
@@ -634,6 +641,24 @@ _застосовується до функціональних типів_
       console.error(error.message); // Виведе: Помилка отримання даних
     });
 
+```
+
+#### Конструктив створеня промісу
+```typescript
+  let p = new Promise<string|void>(resolve, reject) => {
+    // виконуємо асинхронну операцію
+    // ...
+    // в рзі успіху та наявності даних
+    if (success && data) {
+      resolve(data); // string type
+    // операація успішнаа і немає дних
+    } else if (success) {
+      resolve(); // void type
+    // в рзі невдачі
+    } else {
+      reject('Error, something bad happened. Try again later.');
+    }
+  });
 ```
 
 ### Async Functions
@@ -663,3 +688,11 @@ _застосовується до функціональних типів_
   fetchDataAndLog();
 ```
 
+#### Синтаксис асинхронної функції
+```typescript
+  async function doAsyncWork() {
+    let results = await getDataFromServer(); // => promise
+    console.log(results);
+  }
+
+```
