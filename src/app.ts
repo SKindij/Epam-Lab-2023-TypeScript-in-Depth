@@ -11,7 +11,7 @@ import { Category } from './enums';
 // import {  } from './interfaces';
 // import {  } from './types';
 // import {  } from './classes';
-import { getBooksByCategory, logCategorySearch } from './lib/functions';
+import { getBooksByCategory, logCategorySearch, getBooksByCategoryPromise } from './lib/functions';
 
 
 // *TODO: Task 09
@@ -23,7 +23,20 @@ getBooksByCategory(Category.JavaScript, logCategorySearch);
 getBooksByCategory(Category.Software, logCategorySearch);
 console.log('After calling getBooksByCategory');
 
+console.log('--- Завдання 09.02. Проміси ---');
 
+console.log('Before calling getBooksByCategoryPromise');
+getBooksByCategoryPromise(Category.JavaScript)
+  .then(titles => {
+    console.log(titles)
+    return Promise.resolve(titles.length);
+  })
+  .then(n => console.log(n))
+  .catch(reason => console.log(reason));
+getBooksByCategoryPromise(Category.Software)
+  .then(titles => console.log(titles))
+  .catch(reason => console.log(reason));
+console.log('After calling getBooksByCategoryPromise');
 
 
 
