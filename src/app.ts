@@ -11,11 +11,14 @@ import { Category } from './enums';
 // import {  } from './interfaces';
 // import {  } from './types';
 // import {  } from './classes';
-import { getBooksByCategory, logCategorySearch, getBooksByCategoryPromise } from './lib/functions';
+import { getBooksByCategory, logCategorySearch, 
+  getBooksByCategoryPromise,  logSearchResults
+} from './lib/functions';
 
 
 // *TODO: Task 09
 console.log('--- Asynchronous Patterns ---');
+
 console.log('--- Завдання 09.01. Функція зворотнього виклику ---');
 
 console.log('Before calling getBooksByCategory');
@@ -38,5 +41,10 @@ getBooksByCategoryPromise(Category.Software)
   .catch(reason => console.log(reason));
 console.log('After calling getBooksByCategoryPromise');
 
+// отримання типу значення функції getBooksByCategoryPromise()
+type ResultType = Unpromisify<ReturnType<typeof getBooksByCategoryPromise>>;
 
+console.log('--- Завдання 09.03. Асинхронні функції ---');
 
+logSearchResults(Category.JavaScript);
+logSearchResults(Category.Software);
