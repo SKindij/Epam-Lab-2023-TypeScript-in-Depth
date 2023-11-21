@@ -111,3 +111,9 @@ export type RemoveProps<T extends object, TProps extends keyof T> = {
 type BookRequiredPropsType = RemoveProps<Book, BookOptionalProps>;
 type BookOptionalPropsType = RemoveProps<Book, BookRequiredProps>;
 
+/*
+Цей аліас приймає тип T і повертає тип значення, 
+яке отримується після розгортання промісу (якщо T є промісом). 
+Якщо T не є промісом, то повертається той самий тип T.
+*/
+export type Unpromisify<T> = T extends Promise<infer U> ? U : T;
