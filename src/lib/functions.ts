@@ -237,6 +237,19 @@ export function getBooksByCategoryPromise(category:Category):Promise<string[]> {
         } else {
           reject('No books found');
         }
-    }, 2000);
+    }, 2500);
   });
+};
+
+// 09.03. Асинхронні функції
+export async function logSearchResults(category:Category):Promise<void> {
+  console.log('Start of logSearchResults');
+  try {
+    console.log('Searching for books in the library...');
+    const titles = await getBooksByCategoryPromise(category);
+    console.log(`Found ${titles.length} books in category ${Category[category]}`);
+  } catch (error) {
+    console.error(`Error: ${error}`);
+  }
+  console.log('End of logSearchResults');
 };
