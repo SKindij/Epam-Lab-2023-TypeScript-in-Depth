@@ -226,3 +226,17 @@ export const logCategorySearch:LibMgrCallback = (err, titles) => {
     logBookTitles(titles || []);
   }
 };
+
+// 09.02. Проміси
+export function getBooksByCategoryPromise(category:Category):Promise<string[]> {
+  return new Promise<string[]>((resolve, reject) => {
+    setTimeout(() => {
+      const titles = getBookTitlesByCategory(category);
+        if (titles.length > 0) {
+          resolve(titles);
+        } else {
+          reject('No books found');
+        }
+    }, 2000);
+  });
+};
