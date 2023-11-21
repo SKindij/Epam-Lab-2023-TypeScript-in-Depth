@@ -47,6 +47,15 @@ interface ShelfItem {
   title:string;
 };
 
+// 09.01. Інтерфейси для Функцій зворотнього виклику
+export interface LibMgrCallback {
+  (err:Error|null, titles:string[]|null):void;
+};
+// дженерик дозволяє використовувати інтерфейс для різних типів даних
+export interface Callback<T> {
+  (err:Error|null, data:T|null):void;
+};
+
 
 
 
